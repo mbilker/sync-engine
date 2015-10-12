@@ -204,7 +204,13 @@ mkdir -p /etc/inboxapp
 chown $SUDO_UID:$SUDO_GID /etc/inboxapp
 
 color '35;1' 'Copying default development configuration to /etc/inboxapp'
-src=./etc/config-dev.json
+if [ -n $CI ]
+then
+    src=./etc/config-ci.json
+else
+    src=./etc/config-dev.json
+fi
+
 dest=/etc/inboxapp/config.json
 if [ ! -f $dest ]; then
     install -m0644 -o$SUDO_UID $src $dest
@@ -227,7 +233,12 @@ chmod 0644 $dest
 chown $SUDO_UID:$SUDO_GID $dest
 
 color '35;1' 'Copying default secrets configuration to /etc/inboxapp'
-src=./etc/secrets-dev.yml
+if [ -n $CI ]
+then
+    src=./etc/secrets-ci.json
+else
+    src=./etc/secrets-dev.json
+fi
 dest=/etc/inboxapp/secrets.yml
 if [ ! -f $dest ]; then
     install -m0600 -o$SUDO_UID $src $dest
