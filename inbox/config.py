@@ -67,6 +67,8 @@ def _update_config_from_env(config):
             '/etc/inboxapp/config.json',
         ]
     else:
+        if 'CI' in os.environ:  # TravisCI
+            env = 'ci'
         v = {'env': env, 'srcdir': srcdir}
         base_cfg_path = [
             '{srcdir}/etc/secrets-{env}.yml'.format(**v),
