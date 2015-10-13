@@ -235,9 +235,9 @@ chown $SUDO_UID:$SUDO_GID $dest
 color '35;1' 'Copying default secrets configuration to /etc/inboxapp'
 if [ -n $CI ]
 then
-    src=./etc/secrets-ci.json
+    src=./etc/secrets-ci.yml
 else
-    src=./etc/secrets-dev.json
+    src=./etc/secrets-dev.yml
 fi
 dest=/etc/inboxapp/secrets.yml
 if [ ! -f $dest ]; then
